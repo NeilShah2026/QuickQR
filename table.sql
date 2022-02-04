@@ -1,0 +1,1 @@
+CREATE TABLE Tracker(id INT(5) PRIMARY KEY AUTO_INCREMENT , website VARCHAR(225), email VARCHAR(50), tracker INT(10), uses INT(10));

@@ -12,13 +12,13 @@ def send_email(email, tracker_id):
     server.starttls()
 
     server.login(sender, "MyQRCodeKey")
-
+    track_link = "localhost:5000/site/" + str(tracker_id)
     message = MIMEMultipart()
     message["From"] = sender
     message["To"] = email
     message["Subject"] = "Your QR Code Has Been Generated"
     body = """Your QR Code has been generated. Please find the attached QR Code.
-    Please use the following tracker ID to track your QR Code: """ + str(tracker_id)
+    Please use the following link to track your QR Code: """ + track_link
     message.attach(MIMEText(body, "plain"))
 
     filename = "qrcode.png"

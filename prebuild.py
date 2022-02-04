@@ -1,5 +1,4 @@
 # PreBuild of the project
-import webbrowser
 import qrcode
 from helper import send_email
 import random
@@ -9,7 +8,7 @@ url_request = input("Enter the website url: ")
 email_request = input("Enter the email address: ")
 
 # Connect to the database
-db = MySQLdb.connect(host="localhost", user="root", passwd="root", db="QRCodes")
+db = MySQLdb.connect(host="34.123.254.194", user="root", passwd="root", db="QRCodes")
 cursor = db.cursor()
 
 
@@ -24,6 +23,6 @@ qr_code.save("qrcode.png")
 send_email(email_request, tracker_id)
 
 # Insert the data into the database Tracker
-cursor.execute("""INSERT INTO tracker (website, email, tracker, uses) VALUES (%s, %s, %s, %s)""", (url_request, email_request, tracker_id, 0))
+cursor.execute("""INSERT INTO Tracker (website, email, tracker, uses) VALUES (%s, %s, %s, %s)""", (url_request, email_request, tracker_id, 0))
 db.commit()
 print("Executed")
