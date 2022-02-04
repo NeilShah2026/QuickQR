@@ -2,3 +2,4 @@ flask
 qrcode
 WTForms
 gunicorn
+flask_wtf
