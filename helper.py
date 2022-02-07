@@ -12,7 +12,7 @@ def send_email(email, tracker_id):
     server.starttls()
 
     server.login(sender, "MyQRCodeKey")
-    track_link = "localhost:5000/site/" + str(tracker_id)
+    track_link = "localhost:5000/track/" + str(tracker_id)
     message = MIMEMultipart()
     message["From"] = sender
     message["To"] = email
