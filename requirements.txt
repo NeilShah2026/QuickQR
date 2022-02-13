@@ -3,3 +3,4 @@ qrcode
 WTForms
 gunicorn
 flask_wtf
+imple_geoip

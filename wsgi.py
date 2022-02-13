@@ -4,11 +4,13 @@ import qrcode
 from helper import send_email
 import MySQLdb
 import random
+from simple_geoip import GeoIP
 
 # Create the application instance
 app = Flask(__name__, template_folder='templates')
 # make a secret key
 app.config['SECRET_KEY'] = 'mysecretkey'
+geoip = GeoIP('at_MszrioIcGqrBnzAzOFqNqpckA6yai')
 # run app on ngrok
 # Create a URL route in our application for "/"
 
@@ -51,6 +53,10 @@ def index():
 
 @app.route('/site/<tracker_id>')
 def site(tracker_id):
+    # Log IP
+    user_ip = request.environ['REMOTE_ADDR']
+    user_data = geoip.lookup(user_ip)
+    print(user_data)
     # open Tracker table & get the data
     db = MySQLdb.connect(host="34.123.254.194", user="root", passwd="root", db="QRCodes")
     cursor = db.cursor()
@@ -91,4 +97,4 @@ def track(tracker_id):
 
 # If we're running in stand alone mode, run the application on a public IP
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0', port=5000, debug=True)
